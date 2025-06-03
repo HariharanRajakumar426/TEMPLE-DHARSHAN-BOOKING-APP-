@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">My Bookings</h2>
+    {% if bookings %}
+        <div class="grid gap-4">
+            {% for booking in bookings %}
+                <div class="border p-4 rounded">
+                    <p><strong>Temple:</strong> {{ booking[0] }}</p>
+                    <p><strong>Date:</strong> {{ booking[1] }}</p>
+                    <p><strong>Time Slot:</strong> {{ booking[2] }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-600">No bookings found.</p>
+    {% endif %}
+</div>
+{% endblock %}

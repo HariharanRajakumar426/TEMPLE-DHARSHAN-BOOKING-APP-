@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">Book Darshan</h2>
+    <form method="POST" action="{{ url_for('book') }}" id="booking-form">
+        <div class="mb-4">
+            <label class="block text-gray-700">Select Temple</label>
+            <select name="temple" class="w-full p-2 border rounded" required>
+                {% for temple in temples %}
+                    <option value="{{ temple[0] }}">{{ temple[0] }} - {{ temple[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Select Date</label>
+            <input type="date" name="date" id="date-picker" class="w-full p-2 border rounded" required>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Select Time Slot</label>
+            <select name="slot" class="w-full p-2 border rounded" required>
+                <option value="06:00-07:00">06:00 AM - 07:00 AM</option>
+                <option value="07:00-08:00">07:00 AM - 08:00 AM</option>
+                <option value="08:00-09:00">08:00 AM - 09:00 AM</option>
+                <option value="09:00-10:00">09:00 AM - 10:00 AM</option>
+            </select>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700">
+            Book Slot
+        </button>
+    </form>
+</div>
+
+<script>
+    // Set min date to today and max to 30 days from now
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setDate(today.getDate() + 30);
+    
+    const datePicker = document.getElementById('date-picker');
+    datePicker.min = today.toISOString().split('T')[0];
+    datePicker.max = maxDate.toISOString().split('T')[0];
+</script>
+{% endblock %}
